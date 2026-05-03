@@ -1,0 +1,334 @@
+{
+  "Meta": {
+    "title": "ADream — El sistema operativo de la innovación",
+    "description": "Convierte ideas en proyectos reales. Plataforma SaaS de innovación con workflows, IA y facilitación. Programa IFCA gratis disponible."
+  },
+  "Nav": {
+    "product": "Producto",
+    "workflows": "Workflows",
+    "ifca": "IFCA",
+    "pricing": "Precios",
+    "resources": "Recursos",
+    "signIn": "Ingresar",
+    "bookDemo": "Pedir demo",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú",
+    "changeLanguage": "Cambiar idioma"
+  },
+  "Hero": {
+    "eyebrow": "→ INNOVATION OS · HECHO PARA EQUIPOS",
+    "headline_1": "De ideas",
+    "headline_highlight": "a ejecución.",
+    "headline_2": "",
+    "headline_3": "",
+    "subtitle": "Adream convierte la innovación en un sistema ejecutable, medible y colaborativo. Workflows + IA + facilitación, todo en una plataforma.",
+    "ctaPrimary": "Pedir demo",
+    "ctaSecondary": "IFCA gratis",
+    "microcopy": "Sin tarjeta de crédito · Demo en 30 min · Onboarding incluido",
+    "trustBar": "Confiado por equipos de innovación en",
+    "browserUrl": "app.adream.io",
+    "card1Tag": "AI ASSIST",
+    "card1Text": "3 ideas → 1 proyecto",
+    "card2Tag": "VELOCIDAD",
+    "card2Title": "MVP listo",
+    "card2Sub": "en 2 semanas",
+    "card3Tag": "EQUIPO",
+    "card3Text": "12 colaborando",
+    "card4Tag": "EJECUCIÓN",
+    "card4Number": "+87%",
+    "card4Sub": "ejecución de ideas",
+    "stats": {
+      "stat1Value": "+50",
+      "stat1Label": "empresas ejecutando",
+      "stat2Value": "+120",
+      "stat2Label": "proyectos en marcha",
+      "stat3Value": "87%",
+      "stat3Label": "ejecución promedio",
+      "stat4Value": "4.9★",
+      "stat4Label": "rating IFCA"
+    }
+  },
+  "Workflows": {
+    "eyebrow": "→ 02 / WORKFLOWS",
+    "title": "El sistema operativo de la innovación.",
+    "subtitle": "Cuatro workflows preconstruidos para que tu equipo deje de improvisar y empiece a ejecutar.",
+    "tabs": {
+      "tab1": "Construcción de startup",
+      "tab2": "Desafíos de empresa",
+      "tab3": "Mejora continua",
+      "tab4": "Próximamente"
+    },
+    "wf1": {
+      "title": "Construcción de startup",
+      "desc": "El recorrido completo desde la primera intuición hasta un MVP validado. Para founders que no quieren perder tiempo.",
+      "nodes": ["Investigación", "Ideación", "Proyecto", "MVP"],
+      "bullets": [
+        "Plantillas validadas con +120 startups",
+        "Sprints de validación de 2 semanas",
+        "Métricas claras de avance"
+      ]
+    },
+    "wf2": {
+      "title": "Desafíos de empresa",
+      "desc": "Lanza challenges internos, recolecta soluciones, prioriza con tu comité y ejecuta lo que vale la pena.",
+      "nodes": ["Desafío", "Soluciones", "Selección", "Ejecución"],
+      "bullets": [
+        "Convocatoria abierta o segmentada",
+        "Comité de evaluación con scoring",
+        "Roadmap automático del piloto"
+      ]
+    },
+    "wf3": {
+      "title": "Mejora continua",
+      "desc": "Para equipos que ya tienen producto y quieren un sistema serio para iterar sin caos.",
+      "nodes": ["Producto", "Diagnóstico", "Optimización", "Validación"],
+      "bullets": [
+        "Diagnóstico con IA por área",
+        "Backlog de optimización priorizado",
+        "Validación con métricas antes/después"
+      ]
+    },
+    "wf4": {
+      "title": "Más workflows en camino",
+      "desc": "Estamos construyendo plantillas para investigación de mercado, transformación digital y design sprints. Avísanos cuál necesitas primero.",
+      "nodes": ["Research", "Transformación", "Design Sprint", "Tu propuesta"],
+      "bullets": [
+        "Sugiere el próximo workflow",
+        "Acceso anticipado para early users",
+        "Co-construcción con tu equipo"
+      ]
+    },
+    "ctaTab": "Ver demo en vivo →"
+  },
+  "Features": {
+    "eyebrow": "→ 03 / FEATURES",
+    "title": "Todo lo que tu equipo necesita para ejecutar.",
+    "subtitle": "Sin saltar entre 7 herramientas. Sin perder ideas en docs sueltos.",
+    "f1": {
+      "tag": "AI",
+      "title": "IA integrada",
+      "desc": "IA que sugiere, valida y prioriza ideas según tu industria."
+    },
+    "f2": {
+      "tag": "WORKFLOWS",
+      "title": "Workflows preconstruidos",
+      "desc": "Plantillas validadas para los procesos de innovación más comunes."
+    },
+    "f3": {
+      "tag": "TEAMS",
+      "title": "Gestión de equipos",
+      "desc": "Asigna roles, invita facilitadores, traquea el progreso."
+    },
+    "f4": {
+      "tag": "ANALYTICS",
+      "title": "Métricas en tiempo real",
+      "desc": "KPIs claros para que sepas qué se está ejecutando — y qué no."
+    },
+    "f5": {
+      "tag": "COLLAB",
+      "title": "Colaboración integrada",
+      "desc": "Comentarios, decisiones, archivos. Todo en su lugar."
+    },
+    "f6": {
+      "tag": "HUMAN+AI",
+      "title": "Facilitación experta",
+      "desc": "No solo software — facilitadores certificados acompañan tu proceso.",
+      "live": "EN VIVO",
+      "step": "Paso 3 de 5 · Ideación",
+      "speaker": "Matías facilitando"
+    }
+  },
+  "IFCA": {
+    "eyebrow": "→ 04 / IFCA · INNOVATION FACILITATOR CERTIFICATION",
+    "title": "Conviértete en facilitador de innovación certificado.",
+    "subtitle": "Aprende a llevar equipos de la idea a la ejecución, con metodología validada.",
+    "popularBadge": "MÁS POPULAR",
+    "freeBadge": "GRATIS",
+    "plans": {
+      "intro": {
+        "name": "Intro",
+        "price": "$0",
+        "subtitle": "Para empezar a explorar",
+        "features": [
+          "Acceso al curso introductorio",
+          "Comunidad ADream",
+          "Sin certificado"
+        ],
+        "cta": "Empezar gratis"
+      },
+      "foundations": {
+        "name": "Foundations",
+        "price": "$129 USD",
+        "subtitle": "Bases sólidas",
+        "features": [
+          "Curso completo Foundations",
+          "Material descargable",
+          "Certificado digital",
+          "Acceso 6 meses"
+        ],
+        "cta": "Comprar Foundations"
+      },
+      "practitioner": {
+        "name": "Practitioner",
+        "price": "$499 USD",
+        "subtitle": "Para profesionales",
+        "features": [
+          "Todo lo de Foundations",
+          "Curso Practitioner avanzado",
+          "Sesiones live mensuales",
+          "1 sesión 1:1 con instructor",
+          "Certificación oficial IFCA Practitioner"
+        ],
+        "cta": "Empezar Practitioner"
+      },
+      "fullPath": {
+        "name": "Full Path",
+        "price": "$599 USD",
+        "subtitle": "El camino completo",
+        "features": [
+          "Todo lo anterior",
+          "Módulos Master incluidos",
+          "Acceso vitalicio",
+          "Mentoría continua",
+          "Certificación IFCA Master"
+        ],
+        "cta": "Comprar Full Path"
+      }
+    },
+    "enterprise": "¿Eres empresa? Tenemos planes corporativos →"
+  },
+  "Testimonials": {
+    "eyebrow": "→ 05 / CASOS",
+    "title": "Lo que dicen quienes ya ejecutan.",
+    "subtitle": "Equipos reales, proyectos reales, ejecución real.",
+    "items": [
+      {
+        "quote": "Pasamos de tener ideas en PowerPoint a 4 pilotos ejecutándose en el primer trimestre. Adream volvió la innovación medible.",
+        "name": "María José Rivera",
+        "role": "Head of Innovation",
+        "company": "TechCorp Chile"
+      },
+      {
+        "quote": "El IFCA me dio el lenguaje y los frameworks. El producto me dio el sistema. Ahora facilito desafíos sin caos.",
+        "name": "Carlos Mendoza",
+        "role": "Innovation Facilitator",
+        "company": "Universidad del Pacífico"
+      },
+      {
+        "quote": "Los workflows preconstruidos nos ahorraron meses. Lanzamos nuestro MVP en 6 semanas, no en 6 meses.",
+        "name": "Andrea Soto",
+        "role": "Founder",
+        "company": "Verdeo"
+      }
+    ]
+  },
+  "CTA": {
+    "eyebrow": "→ 06 / LET'S TALK",
+    "title_1": "¿Listos para que la innovación",
+    "title_highlight": "se ejecute",
+    "title_2": "?",
+    "subtitle": "Agenda 30 minutos. Te mostramos cómo Adream se adapta a tu equipo, sin compromiso.",
+    "calendarTitle": "Agenda directa",
+    "calendarSub": "30 min con Matías Toro",
+    "calendarFallbackTitle": "Te confirmamos en 24h",
+    "calendarFallbackSub": "Una vez recibido el formulario, recibirás un link para reservar en el horario que prefieras.",
+    "calendarFallbackLabel": "Próximos slots disponibles",
+    "calendarSlot1": "Mañana · 10:00",
+    "calendarSlot2": "Mañana · 15:30",
+    "calendarSlot3": "Pasado mañana · 11:00",
+    "calendarSlot4": "Viernes · 09:00",
+    "formTitle": "Prefieres que te contactemos",
+    "form": {
+      "name": "Nombre",
+      "email": "Email corporativo",
+      "company": "Empresa",
+      "role": "Rol",
+      "rolePlaceholder": "Selecciona tu rol",
+      "roles": {
+        "founder": "Founder / CEO",
+        "innovation": "Líder de Innovación",
+        "hr": "RRHH",
+        "academic": "Académico",
+        "other": "Otro"
+      },
+      "teamSize": "Tamaño del equipo",
+      "teamSizePlaceholder": "Selecciona tamaño",
+      "sizes": {
+        "s1": "1-10",
+        "s2": "11-50",
+        "s3": "51-200",
+        "s4": "200+"
+      },
+      "goal": "¿Qué quieres lograr? (opcional)",
+      "source": "¿Por dónde nos conociste? (opcional)",
+      "sourcePlaceholder": "Selecciona una opción",
+      "sources": {
+        "google": "Google",
+        "linkedin": "LinkedIn",
+        "referral": "Referido",
+        "event": "Evento",
+        "other": "Otro"
+      },
+      "submit": "Enviar y agendar",
+      "submitting": "Enviando…",
+      "responseTime": "Respondemos en 24h hábiles",
+      "errorRequired": "Campo requerido",
+      "errorEmail": "Email inválido"
+    },
+    "success": {
+      "title": "¡Recibido!",
+      "subtitle": "Te escribimos en menos de 24 horas. Mientras tanto, ¿quieres ver cómo se ve el dashboard?",
+      "cta": "Ver demo del producto"
+    }
+  },
+  "Loader": {
+    "tagline": "INNOVATION OS",
+    "phrases": [
+      "Inicializando workflows…",
+      "Cargando IA…",
+      "Conectando equipos…",
+      "Listo para ejecutar."
+    ]
+  },
+  "Manifesto": {
+    "eyebrow": "→ MANIFIESTO",
+    "title_1": "La innovación no es un",
+    "title_highlight": "poster",
+    "title_2": "en la sala.",
+    "body": "Es ejecución. Es MVPs vivos. Es equipos que dejaron de improvisar y empezaron a construir. Adream existe para que tu próxima idea no muera en un PowerPoint.",
+    "stat1Value": "0",
+    "stat1Label": "ideas en cajón",
+    "stat2Value": "100%",
+    "stat2Label": "ejecutable",
+    "stat3Value": "1",
+    "stat3Label": "sistema operativo",
+    "cta": "Ver el método →",
+    "imageAlt": "Manifiesto visual de Adream"
+  },
+  "Footer": {
+    "decorative": "INNOVACIÓN QUE SE EJECUTA",
+    "tagline": "El sistema operativo de la innovación.",
+    "columns": {
+      "navigate": "Navegar",
+      "ifca": "Programa IFCA",
+      "talk": "Hablemos"
+    },
+    "links": {
+      "workflows": "Workflows",
+      "features": "Features",
+      "manifesto": "Manifiesto",
+      "testimonials": "Casos",
+      "intro": "Intro (Free)",
+      "foundations": "Foundations",
+      "practitioner": "Practitioner",
+      "fullPath": "Full Path",
+      "demo": "Pedir demo",
+      "instagram": "Instagram",
+      "linkedin": "LinkedIn",
+      "email": "Escribir email"
+    },
+    "emailValue": "adreamhub@gmail.com",
+    "rights": "© 2026 Adream. Todos los derechos reservados.",
+    "madeIn": "Made with 🚀 in Chile"
+  }
+}

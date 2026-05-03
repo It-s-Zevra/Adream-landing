@@ -1,0 +1,334 @@
+{
+  "Meta": {
+    "title": "ADream — The operating system of innovation",
+    "description": "Turn ideas into real projects. Innovation SaaS platform with workflows, AI, and facilitation. Free IFCA program available."
+  },
+  "Nav": {
+    "product": "Product",
+    "workflows": "Workflows",
+    "ifca": "IFCA",
+    "pricing": "Pricing",
+    "resources": "Resources",
+    "signIn": "Sign in",
+    "bookDemo": "Get demo",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "changeLanguage": "Change language"
+  },
+  "Hero": {
+    "eyebrow": "→ INNOVATION OS · BUILT FOR TEAMS",
+    "headline_1": "From ideas",
+    "headline_highlight": "to execution.",
+    "headline_2": "",
+    "headline_3": "",
+    "subtitle": "Adream turns innovation into an executable, measurable, and collaborative system. Workflows + AI + facilitation, all in one platform.",
+    "ctaPrimary": "Get demo",
+    "ctaSecondary": "Free IFCA",
+    "microcopy": "No credit card · 30-min demo · Onboarding included",
+    "trustBar": "Trusted by innovation teams at",
+    "browserUrl": "app.adream.io",
+    "card1Tag": "AI ASSIST",
+    "card1Text": "3 ideas → 1 project",
+    "card2Tag": "SPEED",
+    "card2Title": "MVP ready",
+    "card2Sub": "in 2 weeks",
+    "card3Tag": "TEAM",
+    "card3Text": "12 collaborating",
+    "card4Tag": "EXECUTION",
+    "card4Number": "+87%",
+    "card4Sub": "idea execution",
+    "stats": {
+      "stat1Value": "+50",
+      "stat1Label": "companies executing",
+      "stat2Value": "+120",
+      "stat2Label": "projects in motion",
+      "stat3Value": "87%",
+      "stat3Label": "average execution",
+      "stat4Value": "4.9★",
+      "stat4Label": "IFCA rating"
+    }
+  },
+  "Workflows": {
+    "eyebrow": "→ 02 / WORKFLOWS",
+    "title": "The operating system of innovation.",
+    "subtitle": "Four pre-built workflows so your team stops improvising and starts executing.",
+    "tabs": {
+      "tab1": "Startup Building",
+      "tab2": "Company Challenges",
+      "tab3": "Continuous Improvement",
+      "tab4": "Coming soon"
+    },
+    "wf1": {
+      "title": "Startup Building",
+      "desc": "The full path from first hunch to validated MVP. For founders who don't want to waste time.",
+      "nodes": ["Research", "Ideation", "Project", "MVP"],
+      "bullets": [
+        "Templates validated with +120 startups",
+        "2-week validation sprints",
+        "Clear progress metrics"
+      ]
+    },
+    "wf2": {
+      "title": "Company Challenges",
+      "desc": "Launch internal challenges, gather solutions, prioritize with your committee, and execute what matters.",
+      "nodes": ["Challenge", "Solutions", "Selection", "Execution"],
+      "bullets": [
+        "Open or segmented call for ideas",
+        "Evaluation committee with scoring",
+        "Automatic pilot roadmap"
+      ]
+    },
+    "wf3": {
+      "title": "Continuous Improvement",
+      "desc": "For teams that already have product and want a real system to iterate without chaos.",
+      "nodes": ["Product", "Diagnosis", "Optimization", "Validation"],
+      "bullets": [
+        "AI-powered diagnosis by area",
+        "Prioritized optimization backlog",
+        "Validation with before/after metrics"
+      ]
+    },
+    "wf4": {
+      "title": "More workflows on the way",
+      "desc": "We're building templates for market research, digital transformation, and design sprints. Tell us which one you need first.",
+      "nodes": ["Research", "Transformation", "Design Sprint", "Your idea"],
+      "bullets": [
+        "Suggest the next workflow",
+        "Early access for early users",
+        "Co-built with your team"
+      ]
+    },
+    "ctaTab": "See live demo →"
+  },
+  "Features": {
+    "eyebrow": "→ 03 / FEATURES",
+    "title": "Everything your team needs to execute.",
+    "subtitle": "Without switching between 7 tools. Without losing ideas in scattered docs.",
+    "f1": {
+      "tag": "AI",
+      "title": "Built-in AI",
+      "desc": "AI that suggests, validates, and prioritizes ideas based on your industry."
+    },
+    "f2": {
+      "tag": "WORKFLOWS",
+      "title": "Pre-built workflows",
+      "desc": "Validated templates for the most common innovation processes."
+    },
+    "f3": {
+      "tag": "TEAMS",
+      "title": "Team management",
+      "desc": "Assign roles, invite facilitators, track progress."
+    },
+    "f4": {
+      "tag": "ANALYTICS",
+      "title": "Real-time metrics",
+      "desc": "Clear KPIs so you know what's executing — and what's not."
+    },
+    "f5": {
+      "tag": "COLLAB",
+      "title": "Built-in collaboration",
+      "desc": "Comments, decisions, files. All in one place."
+    },
+    "f6": {
+      "tag": "HUMAN+AI",
+      "title": "Expert facilitation",
+      "desc": "Not just software — certified facilitators guide your process.",
+      "live": "LIVE",
+      "step": "Step 3 of 5 · Ideation",
+      "speaker": "Matías facilitating"
+    }
+  },
+  "IFCA": {
+    "eyebrow": "→ 04 / IFCA · INNOVATION FACILITATOR CERTIFICATION",
+    "title": "Become a certified innovation facilitator.",
+    "subtitle": "Learn to take teams from idea to execution, with proven methodology.",
+    "popularBadge": "MOST POPULAR",
+    "freeBadge": "FREE",
+    "plans": {
+      "intro": {
+        "name": "Intro",
+        "price": "$0",
+        "subtitle": "Get started",
+        "features": [
+          "Intro course access",
+          "ADream community",
+          "No certificate"
+        ],
+        "cta": "Start free"
+      },
+      "foundations": {
+        "name": "Foundations",
+        "price": "$129 USD",
+        "subtitle": "Solid foundations",
+        "features": [
+          "Full Foundations course",
+          "Downloadable materials",
+          "Digital certificate",
+          "6-month access"
+        ],
+        "cta": "Get Foundations"
+      },
+      "practitioner": {
+        "name": "Practitioner",
+        "price": "$499 USD",
+        "subtitle": "For professionals",
+        "features": [
+          "Everything in Foundations",
+          "Advanced Practitioner course",
+          "Monthly live sessions",
+          "1 instructor 1:1 session",
+          "Official IFCA Practitioner cert"
+        ],
+        "cta": "Start Practitioner"
+      },
+      "fullPath": {
+        "name": "Full Path",
+        "price": "$599 USD",
+        "subtitle": "The full path",
+        "features": [
+          "Everything above",
+          "Master modules included",
+          "Lifetime access",
+          "Ongoing mentorship",
+          "IFCA Master cert"
+        ],
+        "cta": "Get Full Path"
+      }
+    },
+    "enterprise": "Enterprise team? We have corporate plans →"
+  },
+  "Testimonials": {
+    "eyebrow": "→ 05 / CASES",
+    "title": "What our users say.",
+    "subtitle": "Real teams, real projects, real execution.",
+    "items": [
+      {
+        "quote": "We went from PowerPoint ideas to 4 pilots running in the first quarter. Adream made innovation measurable.",
+        "name": "María José Rivera",
+        "role": "Head of Innovation",
+        "company": "TechCorp Chile"
+      },
+      {
+        "quote": "IFCA gave me the language and frameworks. The product gave me the system. Now I facilitate challenges without chaos.",
+        "name": "Carlos Mendoza",
+        "role": "Innovation Facilitator",
+        "company": "Universidad del Pacífico"
+      },
+      {
+        "quote": "The pre-built workflows saved us months. We launched our MVP in 6 weeks, not 6 months.",
+        "name": "Andrea Soto",
+        "role": "Founder",
+        "company": "Verdeo"
+      }
+    ]
+  },
+  "CTA": {
+    "eyebrow": "→ 06 / LET'S TALK",
+    "title_1": "Ready to make innovation",
+    "title_highlight": "execute",
+    "title_2": "?",
+    "subtitle": "Book 30 minutes. We'll show you how Adream fits your team, no commitment.",
+    "calendarTitle": "Book directly",
+    "calendarSub": "30 min with Matías Toro",
+    "calendarFallbackTitle": "Confirmed within 24h",
+    "calendarFallbackSub": "Once we receive your form, you'll get a link to book the slot that works best for you.",
+    "calendarFallbackLabel": "Next available slots",
+    "calendarSlot1": "Tomorrow · 10:00 AM",
+    "calendarSlot2": "Tomorrow · 3:30 PM",
+    "calendarSlot3": "In 2 days · 11:00 AM",
+    "calendarSlot4": "Friday · 9:00 AM",
+    "formTitle": "Prefer we reach out",
+    "form": {
+      "name": "Full name",
+      "email": "Work email",
+      "company": "Company",
+      "role": "Role",
+      "rolePlaceholder": "Select your role",
+      "roles": {
+        "founder": "Founder / CEO",
+        "innovation": "Head of Innovation",
+        "hr": "People & Culture",
+        "academic": "Academic",
+        "other": "Other"
+      },
+      "teamSize": "Team size",
+      "teamSizePlaceholder": "Select size",
+      "sizes": {
+        "s1": "1-10",
+        "s2": "11-50",
+        "s3": "51-200",
+        "s4": "200+"
+      },
+      "goal": "What do you want to achieve? (optional)",
+      "source": "How did you hear about us? (optional)",
+      "sourcePlaceholder": "Select an option",
+      "sources": {
+        "google": "Google",
+        "linkedin": "LinkedIn",
+        "referral": "Referral",
+        "event": "Event",
+        "other": "Other"
+      },
+      "submit": "Submit and schedule",
+      "submitting": "Sending…",
+      "responseTime": "We respond within 24 business hours",
+      "errorRequired": "Required field",
+      "errorEmail": "Invalid email"
+    },
+    "success": {
+      "title": "Got it!",
+      "subtitle": "We'll reach out within 24 hours. Meanwhile, want to see the dashboard?",
+      "cta": "See product demo"
+    }
+  },
+  "Loader": {
+    "tagline": "INNOVATION OS",
+    "phrases": [
+      "Initializing workflows…",
+      "Loading AI…",
+      "Connecting teams…",
+      "Ready to execute."
+    ]
+  },
+  "Manifesto": {
+    "eyebrow": "→ MANIFESTO",
+    "title_1": "Innovation isn't a",
+    "title_highlight": "poster",
+    "title_2": "on the wall.",
+    "body": "It's execution. Live MVPs. Teams that stopped improvising and started building. Adream exists so your next idea doesn't die in a PowerPoint.",
+    "stat1Value": "0",
+    "stat1Label": "ideas in drawer",
+    "stat2Value": "100%",
+    "stat2Label": "executable",
+    "stat3Value": "1",
+    "stat3Label": "operating system",
+    "cta": "See the method →",
+    "imageAlt": "Adream visual manifesto"
+  },
+  "Footer": {
+    "decorative": "INNOVATION THAT EXECUTES",
+    "tagline": "The operating system of innovation.",
+    "columns": {
+      "navigate": "Navigate",
+      "ifca": "IFCA Program",
+      "talk": "Let's talk"
+    },
+    "links": {
+      "workflows": "Workflows",
+      "features": "Features",
+      "manifesto": "Manifesto",
+      "testimonials": "Cases",
+      "intro": "Intro (Free)",
+      "foundations": "Foundations",
+      "practitioner": "Practitioner",
+      "fullPath": "Full Path",
+      "demo": "Get demo",
+      "instagram": "Instagram",
+      "linkedin": "LinkedIn",
+      "email": "Send email"
+    },
+    "emailValue": "adreamhub@gmail.com",
+    "rights": "© 2026 Adream. All rights reserved.",
+    "madeIn": "Made with 🚀 in Chile"
+  }
+}

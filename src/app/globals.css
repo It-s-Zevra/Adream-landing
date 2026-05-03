@@ -1,0 +1,219 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ffffff;
+    --accent: #f0ff5f;
+
+    /* Aurora palette — combina con lime signature */
+    --aurora-lime: #f0ff5f;
+    --aurora-violet: #7c3aed;
+    --aurora-magenta: #d946ef;
+    --aurora-cyan: #22d3ee;
+    --aurora-blue: #3b82f6;
+    --aurora-deep: #0a0a0a;
+    --transparent: transparent;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-feature-settings: 'cv11', 'ss01';
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Selection */
+  ::selection {
+    background: #f0ff5f;
+    color: #0a0a0a;
+  }
+
+  /* Focus visible */
+  :focus-visible {
+    outline: 2px solid #f0ff5f;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-7xl px-6 md:px-8 lg:px-12;
+  }
+
+  .eyebrow-mono {
+    @apply font-mono text-xs font-medium uppercase tracking-wider;
+  }
+
+  .headline-hero {
+    font-size: clamp(2.75rem, 7.5vw, 6rem);
+    line-height: 0.98;
+    letter-spacing: -0.045em;
+    @apply font-display font-bold;
+  }
+
+  .headline-section {
+    font-size: clamp(2rem, 4.5vw, 3.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+    @apply font-display font-semibold;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-full bg-lime px-8 py-4 text-sm font-semibold text-ink-950 shadow-glow transition-all hover:bg-lime-soft hover:shadow-glow-lg;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center rounded-full border border-white/20 px-8 py-4 text-sm font-medium text-white transition-all hover:border-white/40 hover:bg-white/5;
+  }
+
+  .btn-outline-dark {
+    @apply inline-flex items-center justify-center rounded-full border border-line-light px-6 py-3 text-sm font-medium text-ink-950 transition-all hover:border-ink-950;
+  }
+
+  .form-input {
+    @apply w-full appearance-none rounded-xl border border-ink-800 bg-ink-950/80 px-4 py-3 text-sm text-white placeholder-muted shadow-inner transition focus:border-lime focus:outline-none focus:ring-2 focus:ring-lime/20;
+  }
+  .form-input:hover {
+    border-color: rgba(240, 255, 95, 0.25);
+  }
+  select.form-input {
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23B3B3B3' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 1rem;
+    padding-right: 2.25rem;
+  }
+  .is-error .form-input {
+    border-color: rgba(248, 113, 113, 0.6);
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .grid-tech-bg {
+    background-image:
+      linear-gradient(to right, #1f1f1f 1px, transparent 1px),
+      linear-gradient(to bottom, #1f1f1f 1px, transparent 1px);
+    background-size: 80px 80px;
+  }
+
+  .mesh-lime-top {
+    background: radial-gradient(
+      ellipse 600px 400px at 50% 0%,
+      rgba(240, 255, 95, 0.12),
+      transparent 70%
+    );
+  }
+
+  /* Aurora curtain — true northern lights effect, lime only */
+  .aurora-curtain {
+    background-image:
+      radial-gradient(
+        ellipse 60% 40% at 20% 0%,
+        rgba(240, 255, 95, 0.55),
+        transparent 70%
+      ),
+      radial-gradient(
+        ellipse 50% 35% at 80% 10%,
+        rgba(240, 255, 95, 0.4),
+        transparent 70%
+      ),
+      radial-gradient(
+        ellipse 70% 30% at 50% 5%,
+        rgba(240, 255, 95, 0.45),
+        transparent 75%
+      ),
+      repeating-linear-gradient(
+        105deg,
+        rgba(240, 255, 95, 0.18) 0%,
+        rgba(240, 255, 95, 0.18) 6%,
+        transparent 9%,
+        transparent 14%,
+        rgba(240, 255, 95, 0.12) 17%,
+        transparent 22%,
+        transparent 28%
+      );
+    background-size: 200% 200%, 200% 200%, 200% 200%, 300% 300%;
+    background-position: 0% 0%, 100% 0%, 50% 0%, 0% 0%;
+    filter: blur(40px);
+    animation: auroraFlow 24s ease-in-out infinite alternate;
+    pointer-events: none;
+    will-change: background-position, transform;
+  }
+
+  @keyframes auroraFlow {
+    0% {
+      background-position: 0% 0%, 100% 0%, 50% 0%, 0% 0%;
+      transform: translateY(0) skewY(0deg);
+    }
+    50% {
+      background-position: 30% 10%, 70% 5%, 60% 8%, 40% 5%;
+      transform: translateY(-10px) skewY(-1deg);
+    }
+    100% {
+      background-position: 60% 0%, 40% 10%, 70% 4%, 80% 0%;
+      transform: translateY(0) skewY(0deg);
+    }
+  }
+
+  /* Mask radial that focuses aurora on top of hero */
+  .aurora-mask {
+    -webkit-mask-image: radial-gradient(
+      ellipse 95% 70% at 50% 0%,
+      black 25%,
+      transparent 85%
+    );
+    mask-image: radial-gradient(
+      ellipse 95% 70% at 50% 0%,
+      black 25%,
+      transparent 85%
+    );
+  }
+
+  /* Scanline efecto AI sobre mockups */
+  .scanline-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    border-radius: inherit;
+  }
+  .scanline-overlay::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 60%;
+    background: linear-gradient(
+      to bottom,
+      transparent,
+      rgba(240, 255, 95, 0.08),
+      transparent
+    );
+    animation: scanline 5s linear infinite;
+  }
+}
+
+/* Reduced motion respect */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
