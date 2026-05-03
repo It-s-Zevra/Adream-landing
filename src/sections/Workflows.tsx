@@ -150,32 +150,37 @@ export function Workflows() {
               transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
             >
               <MockupBrowserFrame variant="light" url="app.adream.io">
-                <div className="grid h-full grid-cols-12 gap-3 p-4">
-                  <div className="col-span-3 space-y-2 rounded-lg border border-line-light bg-cream p-3">
-                    <div className="h-2 w-16 rounded bg-line-light" />
+                <div className="flex h-full flex-col gap-3 p-3 sm:grid sm:grid-cols-12 sm:gap-3 sm:p-4">
+                  {/* Sidebar — top strip on mobile, left rail on desktop */}
+                  <div className="flex flex-row gap-1.5 overflow-x-auto rounded-lg border border-line-light bg-cream p-2 sm:col-span-3 sm:flex-col sm:gap-1 sm:overflow-visible sm:p-3">
+                    <div className="hidden h-2 w-16 rounded bg-line-light sm:block" />
                     {wf.nodes.map((n) => (
                       <div
                         key={n}
-                        className="rounded p-2 text-[10px] font-medium text-ink-950"
+                        className="flex-shrink-0 whitespace-nowrap rounded px-2 py-1 text-[10px] font-medium text-ink-950 sm:px-2 sm:py-2"
                       >
                         {n}
                       </div>
                     ))}
                   </div>
-                  <div className="col-span-9 space-y-3">
-                    <div className="rounded-lg border border-line-light bg-white p-4">
-                      <div className="mb-3 flex items-center justify-between">
-                        <span className="text-xs font-semibold text-ink-950">{wf.title}</span>
-                        <span className="rounded-full bg-ink-950 px-2 py-0.5 text-[10px] font-mono text-lime">
+
+                  {/* Main */}
+                  <div className="flex flex-1 flex-col gap-3 sm:col-span-9">
+                    <div className="rounded-lg border border-line-light bg-white p-3 sm:p-4">
+                      <div className="mb-3 flex items-center justify-between gap-2">
+                        <span className="truncate text-[11px] font-semibold text-ink-950 sm:text-xs">
+                          {wf.title}
+                        </span>
+                        <span className="flex-shrink-0 rounded-full bg-ink-950 px-2 py-0.5 text-[9px] font-mono text-lime sm:text-[10px]">
                           ACTIVE
                         </span>
                       </div>
-                      <div className="grid grid-cols-4 gap-2">
+                      <div className="grid grid-cols-2 gap-1.5 sm:grid-cols-4 sm:gap-2">
                         {wf.nodes.map((n, i) => (
                           <div
                             key={n}
                             className={cn(
-                              'rounded-md border px-2 py-3 text-center text-[10px] font-medium',
+                              'rounded-md border px-2 py-2 text-center text-[10px] font-medium sm:py-3',
                               i < 2
                                 ? 'border-ink-950 bg-white text-ink-950'
                                 : 'border-line-light text-muted'
@@ -186,11 +191,11 @@ export function Workflows() {
                         ))}
                       </div>
                     </div>
-                    <div className="grid grid-cols-2 gap-3">
+                    <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 sm:gap-3">
                       {wf.bullets.slice(0, 2).map((b) => (
                         <div
                           key={b}
-                          className="rounded-lg border border-line-light bg-white p-3 text-[10px] text-muted"
+                          className="rounded-lg border border-line-light bg-white p-2.5 text-[10px] text-muted sm:p-3"
                         >
                           {b}
                         </div>

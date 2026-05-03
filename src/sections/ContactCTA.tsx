@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -357,14 +357,20 @@ function Field({
 
 function CalendarFallback() {
   const t = useTranslations('CTA');
-  const today = new Date();
-  const dayInWeek = today.getDay();
-  // Build a 14-day strip starting today
-  const days = Array.from({ length: 14 }, (_, i) => {
-    const d = new Date(today);
-    d.setDate(today.getDate() + i);
-    return d;
-  });
+  const locale = useLocale();
+  const [today, setToday] = useState<Date | null>(null);
+
+  useEffect(() => {
+    setToday(new Date());
+  }, []);
+
+  const days = today
+    ? Array.from({ length: 7 }, (_, i) => {
+        const d = new Date(today);
+        d.setDate(today.getDate() + i);
+        return d;
+      })
+    : [];
 
   const slots: Array<{ key: 'calendarSlot1' | 'calendarSlot2' | 'calendarSlot3' | 'calendarSlot4' }> = [
     { key: 'calendarSlot1' },
@@ -379,7 +385,9 @@ function CalendarFallback() {
       <div className="rounded-xl border border-ink-800 bg-ink-950 p-4">
         <div className="mb-3 flex items-center justify-between">
           <p className="font-mono text-[10px] uppercase tracking-wider text-muted">
-            {today.toLocaleDateString('default', { month: 'long', year: 'numeric' })}
+            {today
+              ? today.toLocaleDateString(locale, { month: 'long', year: 'numeric' })
+              : ' '}
           </p>
           <span className="flex items-center gap-1.5 text-[10px] text-muted-dark">
             <Clock className="h-3 w-3 text-lime" />
@@ -387,12 +395,13 @@ function CalendarFallback() {
           </span>
         </div>
         <div className="grid grid-cols-7 gap-1">
-          {days.slice(0, 7).map((d, i) => {
+          {(days.length > 0 ? days : Array.from({ length: 7 })).map((d, i) => {
             const isToday = i === 0;
             const isAvailable = i > 0 && i % 2 === 1;
+            const date = d as Date | undefined;
             return (
               <motion.div
-                key={d.toISOString()}
+                key={i}
                 initial={{ opacity: 0, y: 4 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -407,9 +416,9 @@ function CalendarFallback() {
                 )}
               >
                 <span className="font-mono text-[9px] uppercase tracking-wider opacity-70">
-                  {d.toLocaleDateString('default', { weekday: 'short' }).slice(0, 3)}
+                  {date ? date.toLocaleDateString(locale, { weekday: 'short' }).slice(0, 3) : '—'}
                 </span>
-                <span className="text-sm font-bold">{d.getDate()}</span>
+                <span className="text-sm font-bold">{date ? date.getDate() : '·'}</span>
               </motion.div>
             );
           })}

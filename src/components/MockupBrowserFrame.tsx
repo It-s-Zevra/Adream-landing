@@ -45,7 +45,7 @@ export function MockupBrowserFrame({
         </div>
       </div>
       {/* Content area */}
-      <div className="aspect-[16/10] w-full">{children}</div>
+      <div className="aspect-[4/5] w-full sm:aspect-[16/10]">{children}</div>
     </div>
   );
 }
