@@ -149,7 +149,28 @@ export function Footer() {
       {/* Bottom bar */}
       <div className="border-t border-ink-800">
         <div className="container-page flex flex-col items-center justify-between gap-4 py-6 md:flex-row">
-          <p className="text-xs text-muted">{t('rights')}</p>
+          <div className="flex flex-col items-center gap-2 text-xs text-muted md:flex-row md:gap-4">
+            <p>{t('rights')}</p>
+            <span className="hidden h-3 w-px bg-ink-800 md:inline-block" aria-hidden="true" />
+            <a
+              href="https://zevraz.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex items-center gap-1.5 text-muted transition hover:text-white"
+            >
+              <span>{t('craftedBy')}</span>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="https://res.cloudinary.com/dg1x0cwdc/image/upload/v1774782823/logosolo_vjar0o.png"
+                alt=""
+                className="h-3.5 w-3.5 object-contain opacity-70 transition group-hover:opacity-100"
+              />
+              <span className="font-semibold tracking-wide text-white/80 transition group-hover:text-white">
+                Zevra
+              </span>
+              <ArrowUpRight className="h-3 w-3 opacity-0 transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:opacity-100" />
+            </a>
+          </div>
           <div className="flex items-center gap-4">
             <LanguageToggle />
             <span className="text-xs text-muted">{t('madeIn')}</span>
