@@ -21,6 +21,9 @@ import {
   X,
   Inbox,
   AlertCircle,
+  Lock,
+  Linkedin,
+  ShieldCheck,
 } from 'lucide-react';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { ScrollReveal } from '@/components/ScrollReveal';
@@ -28,6 +31,32 @@ import { cn } from '@/lib/utils';
 
 const MAILER_ENDPOINT =
   'https://mailer-backend-production-5f37.up.railway.app/api/v1/contact/adream';
+
+const SUBMISSIONS_KEY = 'adream:contact:submissions';
+const MAX_SUBMISSIONS = 2;
+const WINDOW_MS = 60 * 60 * 1000; // 1 hour rolling window
+
+function readSubmissions(): number[] {
+  if (typeof window === 'undefined') return [];
+  try {
+    const raw = window.localStorage.getItem(SUBMISSIONS_KEY);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    if (!Array.isArray(parsed)) return [];
+    const now = Date.now();
+    return parsed.filter((ts: unknown): ts is number => typeof ts === 'number' && now - ts < WINDOW_MS);
+  } catch {
+    return [];
+  }
+}
+
+function writeSubmissions(list: number[]) {
+  try {
+    window.localStorage.setItem(SUBMISSIONS_KEY, JSON.stringify(list));
+  } catch {
+    /* storage unavailable — ignore */
+  }
+}
 
 const schema = z.object({
   name: z.string().min(1),
@@ -47,10 +76,22 @@ export function ContactCTA() {
   const t = useTranslations('CTA');
   const tForm = useTranslations('CTA.form');
   const tSuccess = useTranslations('CTA.success');
+  const tLimit = useTranslations('CTA.limit');
+  const [mounted, setMounted] = useState(false);
+  const [submissions, setSubmissions] = useState<number[]>([]);
   const [submitted, setSubmitted] = useState(false);
   const [submittedEmail, setSubmittedEmail] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [errorKind, setErrorKind] = useState<ErrorKind>(null);
+
+  useEffect(() => {
+    setMounted(true);
+    setSubmissions(readSubmissions());
+  }, []);
+
+  const isLocked = mounted && submissions.length >= MAX_SUBMISSIONS;
+  const oldestInWindow = submissions.length > 0 ? Math.min(...submissions) : null;
+  const unlockAt = oldestInWindow ? oldestInWindow + WINDOW_MS : null;
 
   const {
     register,
@@ -60,6 +101,7 @@ export function ContactCTA() {
   } = useForm<FormData>({ resolver: zodResolver(schema) });
 
   const onSubmit = async (data: FormData) => {
+    if (isLocked) return;
     setSubmitting(true);
     setErrorKind(null);
     try {
@@ -78,6 +120,9 @@ export function ContactCTA() {
       });
 
       if (res.ok) {
+        const next = [...readSubmissions(), Date.now()];
+        writeSubmissions(next);
+        setSubmissions(next);
         setSubmittedEmail(data.email);
         setSubmitted(true);
         reset();
@@ -135,6 +180,15 @@ export function ContactCTA() {
             <div className="relative h-full rounded-2xl border border-ink-800 bg-ink-900/60 p-6 backdrop-blur-xl md:p-8">
               <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-lime/50 to-transparent" />
 
+              {isLocked && unlockAt ? (
+                <RateLimitLocked
+                  unlockAt={unlockAt}
+                  count={submissions.length}
+                  onUnlock={() => setSubmissions(readSubmissions())}
+                  t={tLimit}
+                />
+              ) : (
+                <>
               <div className="mb-6 flex items-start justify-between gap-4">
                 <div>
                   <h3 className="text-xl font-bold text-white">{t('formTitle')}</h3>
@@ -294,7 +348,20 @@ export function ContactCTA() {
                     <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                   )}
                 </button>
+
+                {/* Submissions counter — shown after first send */}
+                {mounted && submissions.length > 0 && submissions.length < MAX_SUBMISSIONS && (
+                  <p className="flex items-center justify-center gap-1.5 text-center font-mono text-[10px] uppercase tracking-wider text-muted-dark">
+                    <ShieldCheck className="h-3 w-3 text-lime" />
+                    {tLimit('counter', {
+                      sent: submissions.length,
+                      max: MAX_SUBMISSIONS,
+                    })}
+                  </p>
+                )}
               </form>
+                </>
+              )}
             </div>
           </ScrollReveal>
         </div>
@@ -335,6 +402,115 @@ function Field({
       <div className={cn('relative', error && 'is-error')}>{children}</div>
       {error && <p className="mt-1 text-xs text-red-400">{error}</p>}
     </div>
+  );
+}
+
+function RateLimitLocked({
+  unlockAt,
+  count,
+  onUnlock,
+  t,
+}: {
+  unlockAt: number;
+  count: number;
+  onUnlock: () => void;
+  t: ReturnType<typeof useTranslations>;
+}) {
+  const [remaining, setRemaining] = useState(() => Math.max(0, unlockAt - Date.now()));
+
+  useEffect(() => {
+    const tick = () => {
+      const r = Math.max(0, unlockAt - Date.now());
+      setRemaining(r);
+      if (r <= 0) onUnlock();
+    };
+    tick();
+    const id = setInterval(tick, 1000);
+    return () => clearInterval(id);
+  }, [unlockAt, onUnlock]);
+
+  const minutes = Math.floor(remaining / 60000);
+  const seconds = Math.floor((remaining % 60000) / 1000);
+  const countdown = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+      className="flex flex-col items-center text-center"
+    >
+      <div className="relative">
+        <motion.span
+          animate={{ scale: [1, 1.04, 1] }}
+          transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
+          className="flex h-16 w-16 items-center justify-center rounded-2xl border border-lime/30 bg-lime/10 text-lime shadow-glow-sm"
+        >
+          <Lock className="h-7 w-7" />
+        </motion.span>
+        {[0, 0.6].map((delay, i) => (
+          <motion.span
+            key={i}
+            aria-hidden
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: [0.95, 1.5], opacity: [0.45, 0] }}
+            transition={{ duration: 2, delay, repeat: Infinity, ease: 'easeOut' }}
+            className="absolute inset-0 rounded-2xl border border-lime/40"
+          />
+        ))}
+      </div>
+
+      <h3 className="mt-6 text-2xl font-bold text-white">{t('title')}</h3>
+      <p className="mt-2 max-w-sm text-sm text-muted-dark">
+        {t('subtitle', { count })}
+      </p>
+
+      {/* Countdown */}
+      <div className="mt-6 w-full rounded-2xl border border-lime/30 bg-lime/5 p-4">
+        <p className="font-mono text-[10px] uppercase tracking-wider text-lime">
+          {t('countdownLabel')}
+        </p>
+        <p className="mt-1 font-mono text-3xl font-bold tabular-nums text-white">
+          {countdown}
+        </p>
+        <p className="mt-1 text-xs text-muted-dark">{t('countdownHint')}</p>
+      </div>
+
+      {/* Alternatives */}
+      <div className="mt-5 w-full">
+        <p className="mb-3 font-mono text-[10px] uppercase tracking-wider text-muted">
+          {t('altLabel')}
+        </p>
+        <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+          <a
+            href="mailto:adreamhub@gmail.com"
+            className="group flex items-center gap-3 rounded-xl border border-ink-800 bg-ink-950/60 p-3 text-left transition hover:border-lime/40 hover:bg-ink-950"
+          >
+            <span className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-ink-800 text-white transition group-hover:bg-lime group-hover:text-ink-950">
+              <Mail className="h-4 w-4" />
+            </span>
+            <div className="min-w-0 flex-1">
+              <p className="text-xs font-semibold text-white">{t('altEmail')}</p>
+              <p className="truncate text-[11px] text-muted-dark">adreamhub@gmail.com</p>
+            </div>
+          </a>
+          <a
+            href="https://linkedin.com/company/adreamhub"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex items-center gap-3 rounded-xl border border-ink-800 bg-ink-950/60 p-3 text-left transition hover:border-lime/40 hover:bg-ink-950"
+          >
+            <span className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-ink-800 text-white transition group-hover:bg-lime group-hover:text-ink-950">
+              <Linkedin className="h-4 w-4" />
+            </span>
+            <div className="min-w-0 flex-1">
+              <p className="text-xs font-semibold text-white">{t('altLinkedin')}</p>
+              <p className="truncate text-[11px] text-muted-dark">@adreamhub</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </motion.div>
   );
 }
 

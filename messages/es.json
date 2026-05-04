@@ -290,6 +290,16 @@
       "checkInbox": "Revisa tu bandeja de entrada (y la carpeta de spam, por si acaso).",
       "cta": "Ver demo del producto",
       "close": "Cerrar"
+    },
+    "limit": {
+      "title": "Ya recibimos tu mensaje",
+      "subtitle": "Enviaste {count} mensajes en la última hora. Para evitar spam, el formulario se reactivará automáticamente pronto. Tu información ya está con nuestro equipo.",
+      "countdownLabel": "Disponible nuevamente en",
+      "countdownHint": "El contador se actualiza cada segundo.",
+      "altLabel": "¿Necesitas algo urgente? Escríbenos por aquí",
+      "altEmail": "Envíanos un email",
+      "altLinkedin": "LinkedIn",
+      "counter": "{sent} de {max} envíos realizados"
     }
   },
   "Loader": {

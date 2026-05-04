@@ -290,6 +290,16 @@
       "checkInbox": "Check your inbox (and spam folder, just in case).",
       "cta": "See product demo",
       "close": "Close"
+    },
+    "limit": {
+      "title": "We already got your message",
+      "subtitle": "You sent {count} messages in the last hour. To prevent spam, the form will reactivate automatically soon. Your info is already with our team.",
+      "countdownLabel": "Available again in",
+      "countdownHint": "Counter updates every second.",
+      "altLabel": "Need something urgent? Reach us here",
+      "altEmail": "Send us an email",
+      "altLinkedin": "LinkedIn",
+      "counter": "{sent} of {max} submissions used"
     }
   },
   "Loader": {
