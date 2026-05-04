@@ -18,10 +18,16 @@ import {
   Sparkles,
   Clock,
   ArrowRight,
+  X,
+  Inbox,
+  AlertCircle,
 } from 'lucide-react';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { ScrollReveal } from '@/components/ScrollReveal';
 import { cn } from '@/lib/utils';
+
+const MAILER_ENDPOINT =
+  'https://mailer-backend-production-5f37.up.railway.app/api/v1/contact/adream';
 
 const schema = z.object({
   name: z.string().min(1),
@@ -35,13 +41,16 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>;
 
+type ErrorKind = 'rate' | 'generic' | null;
+
 export function ContactCTA() {
   const t = useTranslations('CTA');
   const tForm = useTranslations('CTA.form');
-  const locale = useLocale();
+  const tSuccess = useTranslations('CTA.success');
   const [submitted, setSubmitted] = useState(false);
+  const [submittedEmail, setSubmittedEmail] = useState('');
   const [submitting, setSubmitting] = useState(false);
-  const calLink = process.env.NEXT_PUBLIC_CAL_LINK;
+  const [errorKind, setErrorKind] = useState<ErrorKind>(null);
 
   const {
     register,
@@ -52,16 +61,33 @@ export function ContactCTA() {
 
   const onSubmit = async (data: FormData) => {
     setSubmitting(true);
+    setErrorKind(null);
     try {
-      const res = await fetch('/api/contact', {
+      const res = await fetch(MAILER_ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...data, locale }),
+        body: JSON.stringify({
+          name: data.name,
+          email: data.email,
+          company: data.company,
+          role: data.role,
+          teamSize: data.teamSize,
+          goal: data.goal ?? '',
+          source: data.source ?? '',
+        }),
       });
+
       if (res.ok) {
+        setSubmittedEmail(data.email);
         setSubmitted(true);
         reset();
+      } else if (res.status === 429) {
+        setErrorKind('rate');
+      } else {
+        setErrorKind('generic');
       }
+    } catch {
+      setErrorKind('generic');
     } finally {
       setSubmitting(false);
     }
@@ -99,42 +125,14 @@ export function ContactCTA() {
         </ScrollReveal>
 
         <div className="mt-16 grid gap-6 lg:grid-cols-5">
-          {/* Calendar / fallback — 2 cols */}
+          {/* Calendar — coming soon */}
           <ScrollReveal delay={0.1} className="lg:col-span-2">
-            <div className="relative h-full overflow-hidden rounded-2xl border border-ink-800 bg-gradient-to-br from-ink-900 to-ink-950 p-6 md:p-8">
-              <div className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-lime/10 blur-3xl" />
-
-              <div className="relative">
-                <div className="mb-5 flex items-center gap-3">
-                  <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-lime text-ink-950 shadow-glow-sm">
-                    <Calendar className="h-5 w-5" />
-                  </span>
-                  <div>
-                    <h3 className="text-lg font-semibold text-white">{t('calendarTitle')}</h3>
-                    <p className="text-xs text-muted-dark">{t('calendarSub')}</p>
-                  </div>
-                </div>
-
-                {calLink ? (
-                  <div className="aspect-square w-full overflow-hidden rounded-xl border border-ink-800 bg-ink-950">
-                    <iframe
-                      src={`https://cal.com/${calLink}?theme=dark`}
-                      className="h-full w-full"
-                      loading="lazy"
-                      title="Cal.com booking"
-                    />
-                  </div>
-                ) : (
-                  <CalendarFallback />
-                )}
-              </div>
-            </div>
+            <ComingSoonCalendar />
           </ScrollReveal>
 
-          {/* Form — 3 cols, stronger presence */}
+          {/* Form — 3 cols */}
           <ScrollReveal delay={0.2} className="lg:col-span-3">
             <div className="relative h-full rounded-2xl border border-ink-800 bg-ink-900/60 p-6 backdrop-blur-xl md:p-8">
-              {/* Glow border on top */}
               <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-lime/50 to-transparent" />
 
               <div className="mb-6 flex items-start justify-between gap-4">
@@ -150,179 +148,164 @@ export function ContactCTA() {
                 </span>
               </div>
 
-              <AnimatePresence mode="wait">
-                {!submitted ? (
-                  <motion.form
-                    key="form"
-                    initial={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    onSubmit={handleSubmit(onSubmit)}
-                    className="space-y-4"
-                    noValidate
+              <form
+                onSubmit={handleSubmit(onSubmit)}
+                className="space-y-4"
+                noValidate
+              >
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <Field
+                    id="name"
+                    label={tForm('name')}
+                    icon={<User className="h-3.5 w-3.5" />}
+                    error={errors.name && tForm('errorRequired')}
                   >
-                    <div className="grid gap-4 sm:grid-cols-2">
-                      <Field
-                        id="name"
-                        label={tForm('name')}
-                        icon={<User className="h-3.5 w-3.5" />}
-                        error={errors.name && tForm('errorRequired')}
-                      >
-                        <input
-                          id="name"
-                          {...register('name')}
-                          className="form-input"
-                          aria-invalid={!!errors.name}
-                        />
-                      </Field>
-                      <Field
-                        id="email"
-                        label={tForm('email')}
-                        icon={<Mail className="h-3.5 w-3.5" />}
-                        error={errors.email && tForm('errorEmail')}
-                      >
-                        <input
-                          id="email"
-                          type="email"
-                          {...register('email')}
-                          className="form-input"
-                          aria-invalid={!!errors.email}
-                        />
-                      </Field>
-                    </div>
-
-                    <div className="grid gap-4 sm:grid-cols-2">
-                      <Field
-                        id="company"
-                        label={tForm('company')}
-                        icon={<Building2 className="h-3.5 w-3.5" />}
-                        error={errors.company && tForm('errorRequired')}
-                      >
-                        <input
-                          id="company"
-                          {...register('company')}
-                          className="form-input"
-                        />
-                      </Field>
-                      <Field
-                        id="role"
-                        label={tForm('role')}
-                        icon={<UserCog className="h-3.5 w-3.5" />}
-                        error={errors.role && tForm('errorRequired')}
-                      >
-                        <select
-                          id="role"
-                          {...register('role')}
-                          defaultValue=""
-                          className="form-input"
-                        >
-                          <option value="" disabled>
-                            {tForm('rolePlaceholder')}
-                          </option>
-                          <option value="founder">{tForm('roles.founder')}</option>
-                          <option value="innovation">{tForm('roles.innovation')}</option>
-                          <option value="hr">{tForm('roles.hr')}</option>
-                          <option value="academic">{tForm('roles.academic')}</option>
-                          <option value="other">{tForm('roles.other')}</option>
-                        </select>
-                      </Field>
-                    </div>
-
-                    <div className="grid gap-4 sm:grid-cols-2">
-                      <Field
-                        id="teamSize"
-                        label={tForm('teamSize')}
-                        icon={<Users className="h-3.5 w-3.5" />}
-                        error={errors.teamSize && tForm('errorRequired')}
-                      >
-                        <select
-                          id="teamSize"
-                          {...register('teamSize')}
-                          defaultValue=""
-                          className="form-input"
-                        >
-                          <option value="" disabled>
-                            {tForm('teamSizePlaceholder')}
-                          </option>
-                          <option value="1-10">{tForm('sizes.s1')}</option>
-                          <option value="11-50">{tForm('sizes.s2')}</option>
-                          <option value="51-200">{tForm('sizes.s3')}</option>
-                          <option value="200+">{tForm('sizes.s4')}</option>
-                        </select>
-                      </Field>
-                      <Field
-                        id="source"
-                        label={tForm('source')}
-                        icon={<Sparkles className="h-3.5 w-3.5" />}
-                      >
-                        <select
-                          id="source"
-                          {...register('source')}
-                          defaultValue=""
-                          className="form-input"
-                        >
-                          <option value="">{tForm('sourcePlaceholder')}</option>
-                          <option value="google">{tForm('sources.google')}</option>
-                          <option value="linkedin">{tForm('sources.linkedin')}</option>
-                          <option value="referral">{tForm('sources.referral')}</option>
-                          <option value="event">{tForm('sources.event')}</option>
-                          <option value="other">{tForm('sources.other')}</option>
-                        </select>
-                      </Field>
-                    </div>
-
-                    <Field id="goal" label={tForm('goal')} icon={<Target className="h-3.5 w-3.5" />}>
-                      <textarea
-                        id="goal"
-                        rows={3}
-                        {...register('goal')}
-                        className="form-input resize-none"
-                      />
-                    </Field>
-
-                    <button
-                      type="submit"
-                      disabled={submitting}
-                      className="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-lime px-6 py-4 text-sm font-semibold text-ink-950 shadow-glow transition hover:bg-lime-soft hover:shadow-glow-lg disabled:opacity-60"
-                    >
-                      {submitting ? tForm('submitting') : tForm('submit')}
-                      {!submitting && (
-                        <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                      )}
-                    </button>
-                  </motion.form>
-                ) : (
-                  <motion.div
-                    key="success"
-                    initial={{ opacity: 0, y: 12 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5 }}
-                    className="flex flex-col items-center justify-center py-12 text-center"
+                    <input
+                      id="name"
+                      {...register('name')}
+                      className="form-input"
+                      aria-invalid={!!errors.name}
+                    />
+                  </Field>
+                  <Field
+                    id="email"
+                    label={tForm('email')}
+                    icon={<Mail className="h-3.5 w-3.5" />}
+                    error={errors.email && tForm('errorEmail')}
                   >
-                    <motion.span
-                      initial={{ scale: 0, rotate: -90 }}
-                      animate={{ scale: 1, rotate: 0 }}
-                      transition={{ type: 'spring', stiffness: 220, damping: 14, delay: 0.1 }}
-                      className="flex h-20 w-20 items-center justify-center rounded-full bg-lime shadow-glow"
+                    <input
+                      id="email"
+                      type="email"
+                      {...register('email')}
+                      className="form-input"
+                      aria-invalid={!!errors.email}
+                    />
+                  </Field>
+                </div>
+
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <Field
+                    id="company"
+                    label={tForm('company')}
+                    icon={<Building2 className="h-3.5 w-3.5" />}
+                    error={errors.company && tForm('errorRequired')}
+                  >
+                    <input
+                      id="company"
+                      {...register('company')}
+                      className="form-input"
+                    />
+                  </Field>
+                  <Field
+                    id="role"
+                    label={tForm('role')}
+                    icon={<UserCog className="h-3.5 w-3.5" />}
+                    error={errors.role && tForm('errorRequired')}
+                  >
+                    <select
+                      id="role"
+                      {...register('role')}
+                      defaultValue=""
+                      className="form-input"
                     >
-                      <Check className="h-10 w-10 text-ink-950" strokeWidth={3} />
-                    </motion.span>
-                    <h4 className="mt-6 text-2xl font-bold text-white">{t('success.title')}</h4>
-                    <p className="mt-2 max-w-sm text-sm text-muted-dark">
-                      {t('success.subtitle')}
-                    </p>
-                    <a
-                      href="#product"
-                      className="mt-6 inline-flex items-center gap-2 rounded-full border border-white/20 px-5 py-3 text-sm font-medium text-white transition hover:bg-white/5"
+                      <option value="" disabled>
+                        {tForm('rolePlaceholder')}
+                      </option>
+                      <option value="founder">{tForm('roles.founder')}</option>
+                      <option value="innovation">{tForm('roles.innovation')}</option>
+                      <option value="hr">{tForm('roles.hr')}</option>
+                      <option value="academic">{tForm('roles.academic')}</option>
+                      <option value="other">{tForm('roles.other')}</option>
+                    </select>
+                  </Field>
+                </div>
+
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <Field
+                    id="teamSize"
+                    label={tForm('teamSize')}
+                    icon={<Users className="h-3.5 w-3.5" />}
+                    error={errors.teamSize && tForm('errorRequired')}
+                  >
+                    <select
+                      id="teamSize"
+                      {...register('teamSize')}
+                      defaultValue=""
+                      className="form-input"
                     >
-                      {t('success.cta')}
-                    </a>
-                  </motion.div>
+                      <option value="" disabled>
+                        {tForm('teamSizePlaceholder')}
+                      </option>
+                      <option value="1-10">{tForm('sizes.s1')}</option>
+                      <option value="11-50">{tForm('sizes.s2')}</option>
+                      <option value="51-200">{tForm('sizes.s3')}</option>
+                      <option value="200+">{tForm('sizes.s4')}</option>
+                    </select>
+                  </Field>
+                  <Field
+                    id="source"
+                    label={tForm('source')}
+                    icon={<Sparkles className="h-3.5 w-3.5" />}
+                  >
+                    <select
+                      id="source"
+                      {...register('source')}
+                      defaultValue=""
+                      className="form-input"
+                    >
+                      <option value="">{tForm('sourcePlaceholder')}</option>
+                      <option value="google">{tForm('sources.google')}</option>
+                      <option value="linkedin">{tForm('sources.linkedin')}</option>
+                      <option value="referral">{tForm('sources.referral')}</option>
+                      <option value="event">{tForm('sources.event')}</option>
+                      <option value="other">{tForm('sources.other')}</option>
+                    </select>
+                  </Field>
+                </div>
+
+                <Field id="goal" label={tForm('goal')} icon={<Target className="h-3.5 w-3.5" />}>
+                  <textarea
+                    id="goal"
+                    rows={3}
+                    {...register('goal')}
+                    className="form-input resize-none"
+                  />
+                </Field>
+
+                {errorKind && (
+                  <div
+                    role="alert"
+                    className="flex items-start gap-2 rounded-lg border border-red-500/30 bg-red-500/10 p-3 text-xs text-red-300"
+                  >
+                    <AlertCircle className="mt-0.5 h-4 w-4 flex-shrink-0" />
+                    <span>
+                      {errorKind === 'rate' ? tForm('errorRate') : tForm('errorGeneric')}
+                    </span>
+                  </div>
                 )}
-              </AnimatePresence>
+
+                <button
+                  type="submit"
+                  disabled={submitting}
+                  className="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-lime px-6 py-4 text-sm font-semibold text-ink-950 shadow-glow transition hover:bg-lime-soft hover:shadow-glow-lg disabled:opacity-60"
+                >
+                  {submitting ? tForm('submitting') : tForm('submit')}
+                  {!submitting && (
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  )}
+                </button>
+              </form>
             </div>
           </ScrollReveal>
         </div>
       </div>
+
+      <SuccessModal
+        open={submitted}
+        email={submittedEmail}
+        onClose={() => setSubmitted(false)}
+        t={tSuccess}
+      />
     </section>
   );
 }
@@ -355,105 +338,276 @@ function Field({
   );
 }
 
-function CalendarFallback() {
+function ComingSoonCalendar() {
   const t = useTranslations('CTA');
-  const locale = useLocale();
-  const [today, setToday] = useState<Date | null>(null);
-
-  useEffect(() => {
-    setToday(new Date());
-  }, []);
-
-  const days = today
-    ? Array.from({ length: 7 }, (_, i) => {
-        const d = new Date(today);
-        d.setDate(today.getDate() + i);
-        return d;
-      })
-    : [];
-
-  const slots: Array<{ key: 'calendarSlot1' | 'calendarSlot2' | 'calendarSlot3' | 'calendarSlot4' }> = [
-    { key: 'calendarSlot1' },
-    { key: 'calendarSlot2' },
-    { key: 'calendarSlot3' },
-    { key: 'calendarSlot4' },
-  ];
-
   return (
-    <div className="space-y-5">
-      {/* Mini calendar strip */}
-      <div className="rounded-xl border border-ink-800 bg-ink-950 p-4">
-        <div className="mb-3 flex items-center justify-between">
-          <p className="font-mono text-[10px] uppercase tracking-wider text-muted">
-            {today
-              ? today.toLocaleDateString(locale, { month: 'long', year: 'numeric' })
-              : ' '}
-          </p>
-          <span className="flex items-center gap-1.5 text-[10px] text-muted-dark">
-            <Clock className="h-3 w-3 text-lime" />
-            30 min
+    <div className="relative h-full overflow-hidden rounded-2xl border border-ink-800 bg-gradient-to-br from-ink-900 to-ink-950 p-6 md:p-8">
+      <div className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-lime/10 blur-3xl" />
+      <div className="pointer-events-none absolute -bottom-10 -left-10 h-40 w-40 rounded-full bg-fuchsia-500/10 blur-3xl" />
+
+      <div className="relative">
+        <div className="mb-5 flex items-center gap-3">
+          <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-lime text-ink-950 shadow-glow-sm">
+            <Calendar className="h-5 w-5" />
           </span>
+          <div>
+            <h3 className="text-lg font-semibold text-white">{t('calendarTitle')}</h3>
+            <p className="text-xs text-muted-dark">{t('calendarSub')}</p>
+          </div>
         </div>
-        <div className="grid grid-cols-7 gap-1">
-          {(days.length > 0 ? days : Array.from({ length: 7 })).map((d, i) => {
-            const isToday = i === 0;
-            const isAvailable = i > 0 && i % 2 === 1;
-            const date = d as Date | undefined;
-            return (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 4 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.04 }}
-                className={cn(
-                  'flex flex-col items-center rounded-lg border py-2 text-center',
-                  isToday
-                    ? 'border-lime bg-lime/10 text-lime'
-                    : isAvailable
-                      ? 'border-ink-800 bg-ink-900/60 text-white hover:border-lime/40 cursor-pointer'
-                      : 'border-ink-800/60 bg-ink-900/30 text-muted'
-                )}
-              >
-                <span className="font-mono text-[9px] uppercase tracking-wider opacity-70">
-                  {date ? date.toLocaleDateString(locale, { weekday: 'short' }).slice(0, 3) : '—'}
-                </span>
-                <span className="text-sm font-bold">{date ? date.getDate() : '·'}</span>
-              </motion.div>
-            );
-          })}
-        </div>
-      </div>
 
-      {/* Slots */}
-      <div>
-        <p className="mb-3 font-mono text-[10px] uppercase tracking-wider text-muted">
-          {t('calendarFallbackLabel')}
-        </p>
-        <div className="space-y-2">
-          {slots.map((s, i) => (
-            <motion.div
-              key={s.key}
-              initial={{ opacity: 0, x: -6 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 + i * 0.06 }}
-              className="group flex items-center justify-between rounded-lg border border-ink-800 bg-ink-950 px-3 py-2 transition hover:border-lime/40"
-            >
-              <span className="text-xs font-medium text-white">{t(s.key)}</span>
-              <span className="font-mono text-[10px] text-lime opacity-0 transition group-hover:opacity-100">
-                disponible →
+        {/* Coming soon hero */}
+        <div className="relative overflow-hidden rounded-xl border border-ink-800 bg-ink-950 p-6">
+          <div className="pointer-events-none absolute inset-0 grid-tech-bg opacity-20" />
+
+          <div className="relative">
+            <div className="mb-4 inline-flex items-center gap-1.5 rounded-full border border-lime/40 bg-lime/10 px-3 py-1">
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-lime opacity-75" />
+                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-lime" />
               </span>
-            </motion.div>
-          ))}
-        </div>
-      </div>
+              <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-lime">
+                {t('comingSoon.badge')}
+              </span>
+            </div>
 
-      {/* Reassurance */}
-      <div className="rounded-lg border border-lime/20 bg-lime/5 p-3 text-xs text-muted-dark">
-        <p className="font-semibold text-white">{t('calendarFallbackTitle')}</p>
-        <p className="mt-1 leading-relaxed">{t('calendarFallbackSub')}</p>
+            <h4 className="text-xl font-bold text-white">{t('comingSoon.title')}</h4>
+            <p className="mt-2 text-sm leading-relaxed text-muted-dark">
+              {t('comingSoon.subtitle')}
+            </p>
+
+            <ul className="mt-5 space-y-2">
+              {(['feature1', 'feature2', 'feature3'] as const).map((key, i) => (
+                <motion.li
+                  key={key}
+                  initial={{ opacity: 0, x: -6 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.15 + i * 0.08 }}
+                  className="flex items-center gap-2.5 text-xs text-white"
+                >
+                  <span className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-lime/15 text-lime">
+                    <Check className="h-3 w-3" strokeWidth={3} />
+                  </span>
+                  {t(`comingSoon.${key}`)}
+                </motion.li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        {/* Reassurance */}
+        <div className="mt-4 rounded-lg border border-lime/20 bg-lime/5 p-3 text-xs text-muted-dark">
+          <p className="flex items-center gap-1.5 font-semibold text-white">
+            <Clock className="h-3.5 w-3.5 text-lime" />
+            {t('comingSoon.responseTitle')}
+          </p>
+          <p className="mt-1 leading-relaxed">{t('comingSoon.responseBody')}</p>
+        </div>
       </div>
     </div>
+  );
+}
+
+function SuccessModal({
+  open,
+  email,
+  onClose,
+  t,
+}: {
+  open: boolean;
+  email: string;
+  onClose: () => void;
+  t: ReturnType<typeof useTranslations>;
+}) {
+  useEffect(() => {
+    if (!open) return;
+    document.body.style.overflow = 'hidden';
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', onKey);
+    return () => {
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', onKey);
+    };
+  }, [open, onClose]);
+
+  return (
+    <AnimatePresence>
+      {open && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.25 }}
+          className="fixed inset-0 z-[120] flex items-center justify-center p-4"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="success-title"
+        >
+          {/* Backdrop */}
+          <button
+            type="button"
+            aria-label={t('close')}
+            onClick={onClose}
+            className="absolute inset-0 bg-ink-950/85 backdrop-blur-md"
+          />
+
+          {/* Card */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.92, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.96, y: 10 }}
+            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            className="relative w-full max-w-md overflow-hidden rounded-3xl border border-ink-800 bg-gradient-to-br from-ink-900 to-ink-950 p-7 shadow-2xl md:p-8"
+          >
+            {/* Glow accent */}
+            <div className="pointer-events-none absolute -right-20 -top-20 h-48 w-48 rounded-full bg-lime/20 blur-3xl" />
+            <div className="pointer-events-none absolute -bottom-20 -left-20 h-48 w-48 rounded-full bg-fuchsia-500/15 blur-3xl" />
+            <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-lime/60 to-transparent" />
+
+            {/* Close button */}
+            <button
+              type="button"
+              onClick={onClose}
+              aria-label={t('close')}
+              className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full border border-ink-800 bg-ink-900/60 text-muted-dark transition hover:border-white/20 hover:text-white"
+            >
+              <X className="h-4 w-4" />
+            </button>
+
+            <div className="relative flex flex-col items-center text-center">
+              {/* Animated check */}
+              <div className="relative">
+                <motion.span
+                  initial={{ scale: 0, rotate: -90 }}
+                  animate={{ scale: 1, rotate: 0 }}
+                  transition={{
+                    type: 'spring',
+                    stiffness: 220,
+                    damping: 14,
+                    delay: 0.15,
+                  }}
+                  className="relative z-10 flex h-20 w-20 items-center justify-center rounded-full bg-lime shadow-glow"
+                >
+                  <Check className="h-10 w-10 text-ink-950" strokeWidth={3} />
+                </motion.span>
+                {/* Pulse rings */}
+                {[0, 0.4].map((delay, i) => (
+                  <motion.span
+                    key={i}
+                    aria-hidden
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    animate={{ scale: [0.9, 1.6], opacity: [0.5, 0] }}
+                    transition={{
+                      duration: 1.8,
+                      delay: 0.3 + delay,
+                      repeat: Infinity,
+                      ease: 'easeOut',
+                    }}
+                    className="absolute inset-0 rounded-full border border-lime/50"
+                  />
+                ))}
+              </div>
+
+              <motion.h4
+                id="success-title"
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.35 }}
+                className="mt-6 text-2xl font-bold text-white md:text-3xl"
+              >
+                {t('title')}
+              </motion.h4>
+              <motion.p
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.42 }}
+                className="mt-2 max-w-sm text-sm text-muted-dark"
+              >
+                {t('subtitle')}
+              </motion.p>
+
+              {/* Response time card */}
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 }}
+                className="mt-6 w-full rounded-2xl border border-lime/30 bg-lime/5 p-4 text-left"
+              >
+                <div className="flex items-start gap-3">
+                  <span className="mt-0.5 flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-xl bg-lime/15 text-lime">
+                    <Clock className="h-4 w-4" />
+                  </span>
+                  <div>
+                    <p className="font-mono text-[10px] uppercase tracking-wider text-lime">
+                      {t('etaLabel')}
+                    </p>
+                    <p className="mt-0.5 text-sm font-semibold text-white">
+                      {t('etaValue')}
+                    </p>
+                    <p className="mt-1 text-xs leading-relaxed text-muted-dark">
+                      {t('etaSub')}
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Email confirmation */}
+              {email && (
+                <motion.div
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.58 }}
+                  className="mt-3 w-full rounded-2xl border border-ink-800 bg-ink-950/60 p-4 text-left"
+                >
+                  <div className="flex items-start gap-3">
+                    <span className="mt-0.5 flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-xl bg-ink-800 text-white">
+                      <Inbox className="h-4 w-4" />
+                    </span>
+                    <div className="min-w-0 flex-1">
+                      <p className="font-mono text-[10px] uppercase tracking-wider text-muted-dark">
+                        {t('emailSentTo')}
+                      </p>
+                      <p className="mt-0.5 truncate text-sm font-semibold text-white">
+                        {email}
+                      </p>
+                      <p className="mt-1 text-xs leading-relaxed text-muted-dark">
+                        {t('checkInbox')}
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+
+              {/* CTAs */}
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.66 }}
+                className="mt-6 flex w-full flex-col gap-2 sm:flex-row"
+              >
+                <button
+                  type="button"
+                  onClick={onClose}
+                  className="inline-flex flex-1 items-center justify-center rounded-full border border-white/15 px-5 py-3 text-sm font-medium text-white/90 transition hover:border-white/30 hover:bg-white/5"
+                >
+                  {t('close')}
+                </button>
+                <a
+                  href="#product"
+                  onClick={onClose}
+                  className="group inline-flex flex-1 items-center justify-center gap-1.5 rounded-full bg-lime px-5 py-3 text-sm font-semibold text-ink-950 shadow-glow-sm transition hover:bg-lime-soft hover:shadow-glow"
+                >
+                  {t('cta')}
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </a>
+              </motion.div>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }

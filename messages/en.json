@@ -230,13 +230,16 @@
     "subtitle": "Book 30 minutes. We'll show you how Adream fits your team, no commitment.",
     "calendarTitle": "Book directly",
     "calendarSub": "30 min with Matías Toro",
-    "calendarFallbackTitle": "Confirmed within 24h",
-    "calendarFallbackSub": "Once we receive your form, you'll get a link to book the slot that works best for you.",
-    "calendarFallbackLabel": "Next available slots",
-    "calendarSlot1": "Tomorrow · 10:00 AM",
-    "calendarSlot2": "Tomorrow · 3:30 PM",
-    "calendarSlot3": "In 2 days · 11:00 AM",
-    "calendarSlot4": "Friday · 9:00 AM",
+    "comingSoon": {
+      "badge": "COMING SOON",
+      "title": "Live availability booking",
+      "subtitle": "We're integrating real-time slot booking. For now, fill out the form and we'll reach out to coordinate.",
+      "feature1": "Calendar in your timezone",
+      "feature2": "Instant confirmation",
+      "feature3": "Automatic reminders",
+      "responseTitle": "In the meantime…",
+      "responseBody": "Fill out the form and we'll get back to you within 24 business hours to coordinate."
+    },
     "formTitle": "Prefer we reach out",
     "form": {
       "name": "Full name",
@@ -273,12 +276,20 @@
       "submitting": "Sending…",
       "responseTime": "We respond within 24 business hours",
       "errorRequired": "Required field",
-      "errorEmail": "Invalid email"
+      "errorEmail": "Invalid email",
+      "errorGeneric": "Something went wrong sending your message. Please try again in a moment.",
+      "errorRate": "Too many requests. Please wait a minute and try again."
     },
     "success": {
-      "title": "Got it!",
-      "subtitle": "We'll reach out within 24 hours. Meanwhile, want to see the dashboard?",
-      "cta": "See product demo"
+      "title": "Message received!",
+      "subtitle": "Your information is with our team.",
+      "etaLabel": "Response time",
+      "etaValue": "Within the next 24 business hours",
+      "etaSub": "If you sent it outside business hours, it may be the next business day.",
+      "emailSentTo": "Confirmation sent to",
+      "checkInbox": "Check your inbox (and spam folder, just in case).",
+      "cta": "See product demo",
+      "close": "Close"
     }
   },
   "Loader": {

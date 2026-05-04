@@ -230,13 +230,16 @@
     "subtitle": "Agenda 30 minutos. Te mostramos cómo Adream se adapta a tu equipo, sin compromiso.",
     "calendarTitle": "Agenda directa",
     "calendarSub": "30 min con Matías Toro",
-    "calendarFallbackTitle": "Te confirmamos en 24h",
-    "calendarFallbackSub": "Una vez recibido el formulario, recibirás un link para reservar en el horario que prefieras.",
-    "calendarFallbackLabel": "Próximos slots disponibles",
-    "calendarSlot1": "Mañana · 10:00",
-    "calendarSlot2": "Mañana · 15:30",
-    "calendarSlot3": "Pasado mañana · 11:00",
-    "calendarSlot4": "Viernes · 09:00",
+    "comingSoon": {
+      "badge": "PRÓXIMAMENTE",
+      "title": "Reserva con disponibilidad en vivo",
+      "subtitle": "Estamos integrando el calendario con slots en tiempo real. Por ahora, completa el formulario y nos coordinamos contigo.",
+      "feature1": "Calendario en tu zona horaria",
+      "feature2": "Confirmación instantánea",
+      "feature3": "Recordatorios automáticos",
+      "responseTitle": "Mientras tanto…",
+      "responseBody": "Llena el formulario y te escribimos en menos de 24 horas hábiles para coordinar."
+    },
     "formTitle": "Prefieres que te contactemos",
     "form": {
       "name": "Nombre",
@@ -273,12 +276,20 @@
       "submitting": "Enviando…",
       "responseTime": "Respondemos en 24h hábiles",
       "errorRequired": "Campo requerido",
-      "errorEmail": "Email inválido"
+      "errorEmail": "Email inválido",
+      "errorGeneric": "Hubo un problema enviando tu mensaje. Inténtalo nuevamente en un momento.",
+      "errorRate": "Demasiadas solicitudes. Espera un minuto e inténtalo de nuevo."
     },
     "success": {
-      "title": "¡Recibido!",
-      "subtitle": "Te escribimos en menos de 24 horas. Mientras tanto, ¿quieres ver cómo se ve el dashboard?",
-      "cta": "Ver demo del producto"
+      "title": "¡Mensaje recibido!",
+      "subtitle": "Tu información ya está con nuestro equipo.",
+      "etaLabel": "Tiempo de respuesta",
+      "etaValue": "Dentro de las próximas 24h hábiles",
+      "etaSub": "Si lo enviaste fuera de horario laboral, podría ser el siguiente día hábil.",
+      "emailSentTo": "Confirmación enviada a",
+      "checkInbox": "Revisa tu bandeja de entrada (y la carpeta de spam, por si acaso).",
+      "cta": "Ver demo del producto",
+      "close": "Cerrar"
     }
   },
   "Loader": {
