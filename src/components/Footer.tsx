@@ -1,26 +1,33 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import { Linkedin, Instagram, Mail, ArrowUpRight } from 'lucide-react';
+import { Link, usePathname } from '@/i18n/routing';
 import { LanguageToggle } from './LanguageToggle';
 import { ScrollReveal } from './ScrollReveal';
 
 export function Footer() {
   const t = useTranslations('Footer');
   const tn = useTranslations('Footer.links');
+  const locale = useLocale();
+  const pathname = usePathname();
+  const isHome = pathname === '/';
+
+  const hashHref = (hash: string) => (isHome ? hash : `/${locale}${hash}`);
+  const ifcaUrl = `/${locale}/ifca`;
 
   const navigateLinks = [
-    { key: 'workflows', href: '#workflows' },
-    { key: 'features', href: '#product' },
-    { key: 'manifesto', href: '#manifesto' },
-    { key: 'testimonials', href: '#testimonials' },
+    { key: 'workflows', href: hashHref('#workflows') },
+    { key: 'features', href: hashHref('#product') },
+    { key: 'manifesto', href: hashHref('#manifesto') },
+    { key: 'testimonials', href: hashHref('#testimonials') },
   ];
 
   const ifcaLinks = [
-    { key: 'intro', href: '#ifca' },
-    { key: 'foundations', href: '#ifca' },
-    { key: 'practitioner', href: '#ifca' },
-    { key: 'fullPath', href: '#ifca' },
+    { key: 'intro', href: `${ifcaUrl}#pricing` },
+    { key: 'foundations', href: `${ifcaUrl}#pricing` },
+    { key: 'practitioner', href: `${ifcaUrl}#pricing` },
+    { key: 'fullPath', href: `${ifcaUrl}#pricing` },
   ];
 
   return (
@@ -49,17 +56,17 @@ export function Footer() {
       <div className="container-page relative z-10 grid gap-12 pb-12 pt-16 md:grid-cols-12">
         {/* Brand column */}
         <div className="md:col-span-5">
-          <a href="#top" className="inline-flex items-center gap-2">
+          <Link href="/" className="inline-flex items-center gap-2">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="https://res.cloudinary.com/dg1x0cwdc/image/upload/v1777816472/Group_1264_1_tvzlhd.png"
               alt="Adream"
               className="h-9 w-auto"
             />
-          </a>
+          </Link>
           <p className="mt-4 max-w-xs text-sm text-muted-dark">{t('tagline')}</p>
           <a
-            href="#contact"
+            href={hashHref('#contact')}
             className="group mt-6 inline-flex items-center gap-2 rounded-full bg-lime px-5 py-2.5 text-sm font-semibold text-ink-950 shadow-glow-sm transition hover:shadow-glow"
           >
             {tn('demo')}

@@ -1,12 +1,12 @@
 {
   "Meta": {
     "title": "ADream — El sistema operativo de la innovación",
-    "description": "Convierte ideas en proyectos reales. Plataforma SaaS de innovación con workflows, IA y facilitación. Programa IFCA gratis disponible."
+    "description": "Convierte ideas en proyectos reales. Plataforma SaaS de innovación con workflows, IA y facilitación. Programa IFC gratis disponible."
   },
   "Nav": {
     "product": "Producto",
     "workflows": "Workflows",
-    "ifca": "IFCA",
+    "ifca": "IFC",
     "pricing": "Precios",
     "resources": "Recursos",
     "signIn": "Ingresar",
@@ -45,7 +45,7 @@
       "stat3Value": "87%",
       "stat3Label": "ejecución promedio",
       "stat4Value": "4.9★",
-      "stat4Label": "rating IFCA"
+      "stat4Label": "rating IFC"
     }
   },
   "Workflows": {
@@ -70,8 +70,8 @@
     },
     "wf2": {
       "title": "Desafíos de empresa",
-      "desc": "Lanza challenges internos, recolecta soluciones, prioriza con tu comité y ejecuta lo que vale la pena.",
-      "nodes": ["Desafío", "Soluciones", "Selección", "Ejecución"],
+      "desc": "Lanza challenges internos, arma equipo, investiga, idea, prototipa y ejecuta el piloto. Todo el recorrido en un sistema.",
+      "nodes": ["Desafío", "Equipo", "Research", "Ideación", "Prototipo", "Piloto"],
       "bullets": [
         "Convocatoria abierta o segmentada",
         "Comité de evaluación con scoring",
@@ -107,7 +107,7 @@
     "f1": {
       "tag": "AI",
       "title": "IA integrada",
-      "desc": "IA que sugiere, valida y prioriza ideas según tu industria."
+      "desc": "La IA potencia las ideas, genera reportes y arma el repositorio de cada proyecto para que el seguimiento sea fluido."
     },
     "f2": {
       "tag": "WORKFLOWS",
@@ -124,11 +124,6 @@
       "title": "Métricas en tiempo real",
       "desc": "KPIs claros para que sepas qué se está ejecutando — y qué no."
     },
-    "f5": {
-      "tag": "COLLAB",
-      "title": "Colaboración integrada",
-      "desc": "Comentarios, decisiones, archivos. Todo en su lugar."
-    },
     "f6": {
       "tag": "HUMAN+AI",
       "title": "Facilitación experta",
@@ -139,7 +134,7 @@
     }
   },
   "IFCA": {
-    "eyebrow": "→ 04 / IFCA · INNOVATION FACILITATOR CERTIFICATION",
+    "eyebrow": "→ IFC · INNOVATION FACILITATOR CERTIFICATION",
     "title": "Conviértete en facilitador de innovación certificado.",
     "subtitle": "Aprende a llevar equipos de la idea a la ejecución, con metodología validada.",
     "popularBadge": "MÁS POPULAR",
@@ -177,7 +172,7 @@
           "Curso Practitioner avanzado",
           "Sesiones live mensuales",
           "1 sesión 1:1 con instructor",
-          "Certificación oficial IFCA Practitioner"
+          "Certificación oficial IFC Practitioner"
         ],
         "cta": "Empezar Practitioner"
       },
@@ -190,7 +185,7 @@
           "Módulos Master incluidos",
           "Acceso vitalicio",
           "Mentoría continua",
-          "Certificación IFCA Master"
+          "Certificación IFC Master"
         ],
         "cta": "Comprar Full Path"
       }
@@ -209,7 +204,7 @@
         "company": "TechCorp Chile"
       },
       {
-        "quote": "El IFCA me dio el lenguaje y los frameworks. El producto me dio el sistema. Ahora facilito desafíos sin caos.",
+        "quote": "El IFC me dio el lenguaje y los frameworks. El producto me dio el sistema. Ahora facilito desafíos sin caos.",
         "name": "Carlos Mendoza",
         "role": "Innovation Facilitator",
         "company": "Universidad del Pacífico"
@@ -311,11 +306,34 @@
       "Listo para ejecutar."
     ]
   },
+  "VideoShowcase": {
+    "eyebrow": "→ MÉTODO EN VIVO",
+    "title": "Mira cómo los equipos ejecutan con Adream.",
+    "subtitle": "Sesiones reales, facilitación, equipos colaborando. Es metodología viva — no diapositivas.",
+    "browserUrl": "adream.io · sesión en vivo",
+    "liveLabel": "● LIVE",
+    "chip": "ADREAM EN ACCIÓN",
+    "duration": "2 min · sin audio fuerte",
+    "iframeTitle": "Adream — Sesión de facilitación en vivo",
+    "playLabel": "Reproducir video de Adream",
+    "tag1Title": "Equipos reales",
+    "tag1Sub": "colaborando en vivo",
+    "tag2Title": "Facilitación IFC",
+    "tag2Sub": "guiada paso a paso",
+    "tag3Title": "MVPs vivos",
+    "tag3Sub": "no PowerPoints",
+    "stat1Value": "+200",
+    "stat1Label": "sesiones facilitadas",
+    "stat2Value": "+50",
+    "stat2Label": "equipos activos",
+    "stat3Value": "100%",
+    "stat3Label": "ejecutable"
+  },
   "Manifesto": {
     "eyebrow": "→ MANIFIESTO",
-    "title_1": "La innovación no es un",
-    "title_highlight": "poster",
-    "title_2": "en la sala.",
+    "title_1": "La innovación no es solo un",
+    "title_highlight": "statement",
+    "title_2": "en la organización.",
     "body": "Es ejecución. Es MVPs vivos. Es equipos que dejaron de improvisar y empezaron a construir. Adream existe para que tu próxima idea no muera en un PowerPoint.",
     "stat1Value": "0",
     "stat1Label": "ideas en cajón",
@@ -331,7 +349,7 @@
     "tagline": "El sistema operativo de la innovación.",
     "columns": {
       "navigate": "Navegar",
-      "ifca": "Programa IFCA",
+      "ifca": "Programa IFC",
       "talk": "Hablemos"
     },
     "links": {

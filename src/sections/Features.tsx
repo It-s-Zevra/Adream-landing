@@ -7,7 +7,6 @@ import {
   Layers,
   Users,
   BarChart3,
-  MessageSquare,
   GraduationCap,
 } from 'lucide-react';
 import { Eyebrow } from '@/components/ui/Eyebrow';
@@ -17,7 +16,7 @@ import { LiveSessionCard } from '@/components/LiveSessionCard';
 import { cn } from '@/lib/utils';
 
 type Feature = {
-  key: 'f1' | 'f2' | 'f3' | 'f4' | 'f5' | 'f6';
+  key: 'f1' | 'f2' | 'f3' | 'f4' | 'f6';
   icon: React.ReactNode;
   className: string;
   visual: React.ReactNode;
@@ -82,7 +81,7 @@ export function Features() {
     {
       key: 'f3',
       icon: <Users className="h-5 w-5" />,
-      className: 'lg:col-span-5',
+      className: 'lg:col-span-6',
       visual: (
         <div className="space-y-2">
           {[
@@ -107,7 +106,7 @@ export function Features() {
     {
       key: 'f4',
       icon: <BarChart3 className="h-5 w-5" />,
-      className: 'lg:col-span-4',
+      className: 'lg:col-span-6',
       visual: (
         <div className="rounded-lg border border-ink-800 bg-ink-950/60 p-3">
           <div className="mb-3 flex items-end gap-2">
@@ -127,27 +126,6 @@ export function Features() {
       ),
     },
     {
-      key: 'f5',
-      icon: <MessageSquare className="h-5 w-5" />,
-      className: 'lg:col-span-3',
-      visual: (
-        <div className="space-y-2">
-          {[
-            { who: 'M', txt: 'Aprobado para piloto.' },
-            { who: 'C', txt: 'Empezamos lunes.' },
-          ].map((c, i) => (
-            <div
-              key={i}
-              className="rounded-lg border border-ink-800 bg-ink-950/60 p-2"
-            >
-              <p className="font-mono text-[10px] text-lime">{c.who}</p>
-              <p className="mt-1 text-[11px] text-white">{c.txt}</p>
-            </div>
-          ))}
-        </div>
-      ),
-    },
-    {
       key: 'f6',
       icon: <GraduationCap className="h-5 w-5" />,
       className: 'lg:col-span-12',
@@ -156,9 +134,9 @@ export function Features() {
           <LiveSessionCard />
           <div className="grid grid-cols-3 content-start gap-3">
             {[
-              { init: 'MT', name: 'Matías Toro', role: 'IFCA Master' },
-              { init: 'JR', name: 'Julia Reyes', role: 'IFCA Practitioner' },
-              { init: 'CB', name: 'Camilo B.', role: 'IFCA Master' },
+              { init: 'MT', name: 'Matías Toro', role: 'IFC Master' },
+              { init: 'JR', name: 'Julia Reyes', role: 'IFC Practitioner' },
+              { init: 'CB', name: 'Camilo B.', role: 'IFC Master' },
             ].map((f, i) => (
               <motion.div
                 key={f.init}
@@ -179,7 +157,7 @@ export function Features() {
             ))}
             <div className="col-span-3 mt-1 rounded-xl border border-lime/30 bg-lime/5 p-3">
               <p className="text-[10px] font-mono uppercase tracking-wider text-lime">
-                + 12 IFCA certificados activos
+                + 12 IFC certificados activos
               </p>
               <div className="mt-2 flex -space-x-1.5">
                 {Array.from({ length: 8 }).map((_, i) => (

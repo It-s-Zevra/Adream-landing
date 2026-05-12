@@ -118,7 +118,7 @@ export function AdreamHubMockup({ className }: { className?: string }) {
           </div>
           <div className="hidden flex-shrink-0 items-center gap-1 rounded-full border border-emerald-400/40 bg-emerald-500/10 px-2.5 py-1 text-[10px] font-medium text-emerald-300 sm:flex">
             <Sparkles className="h-3 w-3" />
-            Estudiantil
+            Organización
           </div>
         </div>
 

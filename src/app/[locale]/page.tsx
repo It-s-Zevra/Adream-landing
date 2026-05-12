@@ -3,7 +3,7 @@ import { Hero } from '@/sections/Hero';
 import { Workflows } from '@/sections/Workflows';
 import { Features } from '@/sections/Features';
 import { Manifesto } from '@/sections/Manifesto';
-import { IFCA } from '@/sections/IFCA';
+import { VideoShowcase } from '@/sections/VideoShowcase';
 import { Testimonials } from '@/sections/Testimonials';
 import { ContactCTA } from '@/sections/ContactCTA';
 
@@ -21,7 +21,7 @@ export default async function Home({
       <Workflows />
       <Features />
       <Manifesto />
-      <IFCA />
+      <VideoShowcase />
       <Testimonials />
       <ContactCTA />
     </main>
