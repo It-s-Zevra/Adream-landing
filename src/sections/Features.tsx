@@ -85,9 +85,9 @@ export function Features() {
       visual: (
         <div className="space-y-2">
           {[
-            { name: 'María José R.', role: 'Head of Innovation' },
-            { name: 'Carlos M.', role: 'Facilitator' },
-            { name: 'Andrea S.', role: 'Founder' },
+            { name: 'Soledad H.', role: 'Service Designer' },
+            { name: 'Matías E.', role: 'Business Developer' },
+            { name: 'Equipo académico', role: 'Innovación' },
           ].map((m) => (
             <div
               key={m.name}

@@ -134,14 +134,14 @@ export function Hero() {
           <LogoMarquee
             tone="light"
             logos={[
-              { name: 'TechCorp' },
-              { name: 'Verdeo' },
-              { name: 'U. Pacífico' },
-              { name: 'Innova SA' },
-              { name: 'Foresta' },
-              { name: 'Quanta' },
-              { name: 'Móvil+' },
-              { name: 'Atlas Co' },
+              { name: 'Escuela de Contadores de Santiago' },
+              { name: 'Universidad Adolfo Ibáñez' },
+              { name: 'Imagina Consultores' },
+              { name: 'CIIE' },
+              { name: 'TAYA' },
+              { name: 'Favorcito' },
+              { name: 'Guil Mobility Ventures' },
+              { name: 'CS Consultores' },
             ]}
           />
         </motion.div>
