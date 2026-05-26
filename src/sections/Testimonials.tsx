@@ -25,7 +25,7 @@ export function Testimonials() {
           <p className="mt-4 text-lg text-muted">{t('subtitle')}</p>
         </ScrollReveal>
 
-        <div className="mt-14 grid gap-6 md:grid-cols-3">
+        <div className="mx-auto mt-14 grid max-w-4xl gap-6 md:grid-cols-2">
           {items.map((it, i) => (
             <motion.figure
               key={it.name}
