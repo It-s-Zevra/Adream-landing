@@ -98,7 +98,7 @@ export function Navbar() {
 
           {/* Right cluster */}
           <div className="hidden items-center gap-3 lg:flex">
-            <LanguageToggle />
+            <LanguageToggle variant={scrolled ? 'dark' : 'light'} />
             <a href="#signin" className={linkClass}>
               {t('signIn')}
             </a>

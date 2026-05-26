@@ -41,10 +41,18 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: 'Meta' });
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://adream.io';
 
+  const iconUrl =
+    'https://res.cloudinary.com/dg1x0cwdc/image/upload/v1777816477/icoA1_ua61ly.png';
+
   return {
     metadataBase: new URL(siteUrl),
     title: t('title'),
     description: t('description'),
+    icons: {
+      icon: iconUrl,
+      shortcut: iconUrl,
+      apple: iconUrl,
+    },
     alternates: {
       canonical: `/${locale}`,
       languages: {
