@@ -1,7 +1,11 @@
 {
   "Meta": {
     "title": "ADream — The operating system of innovation",
-    "description": "Turn ideas into real projects. Innovation SaaS platform with workflows, AI, and facilitation. Free IFC program available."
+    "titleTemplate": "%s | ADream",
+    "description": "Turn ideas into real projects. Innovation SaaS platform with workflows, AI, and facilitation. Free IFC program available.",
+    "keywords": "innovation platform, innovation SaaS, innovation management, corporate innovation, intrapreneurship, startup building, innovation workflows, AI for innovation, facilitator certification, IFC, innovation facilitator, innovation operating system, innovation software, Adream",
+    "ogAlt": "ADream — The operating system of innovation",
+    "siteName": "ADream"
   },
   "Nav": {
     "product": "Product",
